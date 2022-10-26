@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EmployeeTaskLog.Models;
 
-public class Application
+public class Application    
 {
     public int Id { get; set; }
 

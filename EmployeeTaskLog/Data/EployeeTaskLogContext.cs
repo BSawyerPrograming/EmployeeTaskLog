@@ -11,7 +11,7 @@ public class EployeeTaskLogContext : DbContext
     public DbSet<Job> Jobs { get; set; } = null!;
     public DbSet<Application> Applications { get; set; } = null!;
 
-
+    
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlServer(Config.ConnectionString());
