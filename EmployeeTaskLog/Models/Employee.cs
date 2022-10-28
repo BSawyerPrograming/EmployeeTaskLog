@@ -11,5 +11,5 @@ public class Employee
 
     public string LastName { get; set; } = null!;
 
-    public IList<Job> Jobs { get; set; } = null!;
+    public ICollection<Job> Jobs { get; set; } = null!;
 }

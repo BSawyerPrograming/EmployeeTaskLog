@@ -15,7 +15,7 @@ public class Job
 
     public Employee Employee { get; set; } = null!;
 
-    public IList<Application> Applications { get; set; } = null!;
+    public ICollection<Application> Applications { get; set; } = null!;
 
 
 }
