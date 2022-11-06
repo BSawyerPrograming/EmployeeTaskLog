@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EmployeeTaskLog.Migrations
 {
-    [DbContext(typeof(EployeeTaskLogContext))]
+    [DbContext(typeof(EmployeeTaskLogContext))]
     partial class EployeeTaskLogContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -21,31 +21,6 @@ namespace EmployeeTaskLog.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("EmployeeTaskLog.Models.Application", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("JobId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(6,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("JobId");
-
-                    b.ToTable("Applications");
-                });
 
             modelBuilder.Entity("EmployeeTaskLog.Models.Employee", b =>
                 {
@@ -79,9 +54,6 @@ namespace EmployeeTaskLog.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("ApplicationId")
-                        .HasColumnType("int");
-
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
@@ -96,11 +68,29 @@ namespace EmployeeTaskLog.Migrations
                     b.ToTable("Jobs");
                 });
 
-            modelBuilder.Entity("EmployeeTaskLog.Models.Application", b =>
+            modelBuilder.Entity("EmployeeTaskLog.Models.Tool", b =>
                 {
-                    b.HasOne("EmployeeTaskLog.Models.Job", null)
-                        .WithMany("Applications")
-                        .HasForeignKey("JobId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("InUse")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("Tools");
                 });
 
             modelBuilder.Entity("EmployeeTaskLog.Models.Job", b =>
@@ -114,14 +104,20 @@ namespace EmployeeTaskLog.Migrations
                     b.Navigation("Employee");
                 });
 
+            modelBuilder.Entity("EmployeeTaskLog.Models.Tool", b =>
+                {
+                    b.HasOne("EmployeeTaskLog.Models.Employee", "Employee")
+                        .WithMany("Tools")
+                        .HasForeignKey("EmployeeId");
+
+                    b.Navigation("Employee");
+                });
+
             modelBuilder.Entity("EmployeeTaskLog.Models.Employee", b =>
                 {
                     b.Navigation("Jobs");
-                });
 
-            modelBuilder.Entity("EmployeeTaskLog.Models.Job", b =>
-                {
-                    b.Navigation("Applications");
+                    b.Navigation("Tools");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,4 +1,6 @@
 ﻿using EmployeeTaskLog.Configuration;
 using EmployeeTaskLog.Models;
+using EmployeeTaskLog.Services;
 
-Console.WriteLine("Place Holder");
+EmployeeService e = new EmployeeService();
+e.AddEmployee("John", "Alex", "Smith");
