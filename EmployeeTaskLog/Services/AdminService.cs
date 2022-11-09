@@ -15,4 +15,17 @@ public class AdminService
         ctx.Add(job);
         ctx.SaveChanges();
     }
+
+    public void CreateJob(string name, string description)
+    {
+        EmployeeTaskLogContext ctx = new EmployeeTaskLogContext();
+        Job job = new Job()
+        {
+            Name = name,
+            Description = description
+        };
+        ctx.Add(job);
+        ctx.SaveChanges();
+    }
+}
 }
