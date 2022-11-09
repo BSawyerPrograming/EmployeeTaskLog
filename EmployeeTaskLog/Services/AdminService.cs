@@ -7,8 +7,8 @@ public class AdminService
 {
     public void CreateJob(string name)
     {
-        EmployeeTaskLogContext ctx = new EmployeeTaskLogContext();
-        Job job = new Job()
+        var ctx = new EmployeeTaskLogContext();
+        var job = new Job()
         {
             Name = name
         };
@@ -18,8 +18,8 @@ public class AdminService
 
     public void CreateJob(string name, string description)
     {
-        EmployeeTaskLogContext ctx = new EmployeeTaskLogContext();
-        Job job = new Job()
+        var ctx = new EmployeeTaskLogContext();
+        var job = new Job()
         {
             Name = name,
             Description = description
@@ -28,4 +28,4 @@ public class AdminService
         ctx.SaveChanges();
     }
 }
-}
+
